@@ -12,15 +12,15 @@ const CardComponent = ({element,key}) => {
         <Circle/>
         </div>
         <div className='mt-[5%] text-[12px] mb-[5%]  font-medium'>
-            <div className='flex bg-custom-gradient1 rounded-md px-[2%] py-1 w-full'>
+            <div className='flex bg-custom-gradient1 rounded-md px-[5%] py-1 w-full'>
              <p className='mr-auto '>{element.c1}</p>
              <p className='ml-auto'>{element.v1}</p>
             </div>
-            <div className='flex mt-2 bg-custom-gradient2  rounded-md py-1 px-[2%]' >
+            <div className='flex mt-2 bg-custom-gradient2  rounded-md py-1 px-[5%]' >
              <p className='mr-auto'>{element.c2}</p>
              <p className='ml-auto'>{element.v2}</p>
             </div>
-            <div className='flex mt-2 bg-custom-gradient3  rounded-md py-1 px-[2%]' >
+            <div className='flex mt-2 bg-custom-gradient3  rounded-md py-1 px-[5%]' >
              <p className='mr-auto'>{element.c3}</p>
              <p className='ml-auto'>{element.v3}</p>
             </div>

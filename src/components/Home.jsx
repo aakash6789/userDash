@@ -66,7 +66,7 @@ const Home = () => {
   </div>
 
   </div>
-   <div className='flex w-[90%] mt-[2%] space-x-4 justify-between'>
+   <div className='flex w-[90%] mt-[2%] space-x-16 justify-between'>
    <div className="flex flex-col  bg-white rounded-lg shadow-md p-4">
       <div className="flex flex-row justify-between items-center">
         <div className='flex'>
@@ -77,7 +77,7 @@ const Home = () => {
 
           </div>
         </div>
-        <p className="text-[1.5vh] text-[#111111] font-style1">13 Fab 24</p>
+        <p className="text-[1.5vh] text-[#111111] font-style1 w-[20%]">13 Fab 24</p>
       </div>
       <div className="mt-4">
        
@@ -98,7 +98,7 @@ const Home = () => {
 
           </div>
         </div>
-        <p className="text-[1.5vh] text-[#111111] font-style1">13 Fab 24</p>
+        <p className="text-[1.5vh] text-[#111111] font-style1 w-[20%]">13 Fab 24</p>
       </div>
       <div className="mt-4">
        
