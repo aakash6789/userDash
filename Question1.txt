@@ -1,0 +1,73 @@
+Logic
+1)For monthly logged in users
+We will start iterating through each user, and see if any device is fulfilling at-least one condition
+
+a)logged_out date falls within the month.
+b)logged_in date falls within the month.
+c)logged_in date is greater than loggedOut date.
+d)lastSeen falls within the month.
+e)LoggedOut date is null(user hasn't even logged out once)
+
+If any of one these condition is fulfilled, we will increment the count for logged in users.
+
+2) For monthly active users
+We will start iterating through each user, and see if lastSeen falls within that month for at-least 1 device of the user. If this condition is fulfilled we will increment the count for active users.
+
+
+Assumptions
+
+a)logged_in, logged_out, lastSeen are dates or timestamps.
+b) If any device of the user falls in the category of logged-in as stated in the above, then user will be considered in monthly logged users.
+c)User will be considered as logged in user even if it is for a minute or some seconds, he or she does not necessarily have to be logged-in for major part of the month to be counted in monthly logged-in users.
+d)logged_out date can be null(user hasn't even logged out once).
+
+Code
+
+interface User {
+    id: string;
+    logged_in: Date;
+    logged_out: Date | null;
+    lastSeenAt: Date[];
+}
+
+function liesInPresentMonth(timestamp: Date, year: number, month: number): boolean {
+    const startOfMonth = new Date(year, month - 1, 1);
+    const endOfMonth = new Date(year, month, 0);
+    return (timestamp >= startOfMonth) && (timestamp <=endOfMonth);
+}
+
+function getMonthlyLoggedInUsers(users: User[], year: number, month: number): number {
+    let count = 0;
+    for (const user of users) {
+        const { logged_in, logged_out } = user;
+        if (
+            (!logged_out)||(logged_out && liesInPresentMonth(logged_out, year, month)) ||
+            liesInPresentMonth(logged_in, year, month)
+        ) {
+            count++;
+            continue;
+        }
+    }
+    return count;
+}
+
+function getMonthlyActiveUsers(users: User[], year: number, month: number): number {
+    let count = 0;
+    for (const user of users) {
+        for (const lastSeen of user.lastSeenAt) {
+            if (liesInPresentMonth(lastSeen, year, month)) {
+                count++;
+                break;
+            }
+        }
+    }
+    return count;
+}
+
+const totalMonthlyLoggedInUsers = getMonthlyLoggedInUsers(users, year, month);
+const totalActiveUsers = getMonthlyActiveUsers(users, year, month);
+
+Improvements
+a)We can use indexing on fields like logged_in, logged_out to help searching and improving query performance.
+b)At end of every month store and save data like no of logins and active sessions the month, instead of processing and finding everytime
+c)We can also map user with id, to retrieve the user in O(1) time but this can increase the storage load on database.
