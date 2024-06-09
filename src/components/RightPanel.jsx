@@ -17,11 +17,13 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
 
-
-const drawerWidth = 440;
+const drawerWidth = "28%";
 
 const RightPanel = () => {
+  const completedActivities=useSelector(state=>state.activities.completedActivities);
+  const scheduledActivities=useSelector(state=>state.activities.scheduledActivities);
   return (
    <div>
       <Box sx={{ display: 'flex' }}>
@@ -46,21 +48,21 @@ const RightPanel = () => {
       >
 
       <List className='ml-[5%]'>
-        <div className='mt-[5%] font-roboto ml-[5%]'>
+        <div className='mt-[3%] font-roboto ml-[5%]'>
             <div>
        <h1 className='font-roboto font-style2 '>Today's highlights (14)</h1>
        <p className='mt-2 font-style1 text-[#676666] text-xs'>19th March 2024</p>
         </div>
-        <div className='flex justify-between pr-[5%]  mt-[5%]'>
-        <Card variant="outlined">
+        <div className='flex justify-between pr-[5%]  mt-[3%]'>
+        <Card variant="outlined" className='h-[12vh] w-[40%]'>
         <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <Typography  sx={{ color: '#676666' , fontSize: 10 }}>
        Income
       </Typography>
-      <Typography variant="h6" component="div" sx={{ color: '#148714' }}>
+      <Typography variant="h7" component="div" sx={{ color: '#148714' }}>
        1000000 CAD
       </Typography>
-      <Typography variant="body2">
+      <Typography sx={{ color: '#676666' , fontSize: 10 }}>
         2 payments recieved
         <br />
  
@@ -68,16 +70,16 @@ const RightPanel = () => {
     </CardContent>
  
         </Card>
-        <Card variant="outlined">
+        <Card variant="outlined" className='h-[12vh] w-[40%]'>
         <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
        Expenses
       </Typography>
-      <Typography variant="h6" component="div" sx={{ color: '#D04141' }}>
+      <Typography variant="h7" component="div" sx={{ color: '#D04141' }}>
       50000 CAD
       </Typography>
 
-      <Typography variant="body2">
+      <Typography sx={{ color: '#676666' , fontSize: 10 }}>
         5 payments paid
         <br />
  
@@ -88,78 +90,53 @@ const RightPanel = () => {
         </div>
         </div>
 
-        <div className='mt-[8%] font-roboto  ml-[5%]'>
-            <div>
-       <h1 className='font-roboto font-style2 '>Completed Activities (14)</h1>
+        <div className='mt-[5%] font-roboto  ml-[5%]'>
+            <div className='flex'>
+       <h1 className='font-roboto font-style2 mr-auto '>Completed Activities (14)</h1>
+       <h1 className='underline ml-auto pr-[5%] text-sm mt-1'>View all</h1>
 
         </div>
-        <div className=' pr-[5%]  mt-[5%]'>
+        <div className=' pr-[5%]  mt-[3%]'>
         <Card variant="outlined">
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
-      </Typography>
-
-    </CardContent>
-    <Divider/>
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
-      </Typography>
+    
  
-    </CardContent>
-    <Divider/>
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
+      {Array.isArray(completedActivities) && completedActivities.map((element)=> (
+          <div key={element.id}>
+            <CardContent>
+      <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
+      <p><span className='text-[#1A3875]'>{element.name}</span>{element.content}<span className='text-black'>{element.load}</span></p> 
       </Typography>
    
     </CardContent>
     <Divider/>
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
-      </Typography>
- 
-    </CardContent>
+
+          </div>
+        )
+      )}
  
         </Card>
         </div>
         </div>
         <div className='mt-[4%] font-roboto  ml-[5%]'>
-            <div>
-       <h1 className='font-roboto font-style2 '>Scheduled Activities (14)</h1>
-
+            <div className='flex'>
+       <h1 className='font-roboto font-style2 mr-auto '>Scheduled Activities (14)</h1>
+       <h1 className='underline ml-auto pr-[5%] text-sm mt-1'>View all</h1>
         </div>
-        <div className=' pr-[5%]  mt-[5%]'>
+        <div className=' pr-[5%]  mt-[3%]'>
         <Card variant="outlined">
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
-      </Typography>
-
-    </CardContent>
-    <Divider/>
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
-      </Typography>
- 
-    </CardContent>
-    <Divider/>
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
+    {Array.isArray(scheduledActivities) && scheduledActivities.map((element)=> (
+          <div key={element.id}>
+            <CardContent>
+      <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
+      <p><span className='text-[#1A3875]'>{element.name}</span>{element.content}<span className='text-black'>{element.load}</span></p> 
       </Typography>
    
     </CardContent>
     <Divider/>
-        <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-       Income
-      </Typography>
- 
-    </CardContent>
+
+          </div>
+        )
+      )}
  
         </Card>
         </div>

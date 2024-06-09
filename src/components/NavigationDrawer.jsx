@@ -26,7 +26,8 @@ import icon9 from '../assets/images/icon9.png'
 import icon10 from '../assets/images/icon10.png'
 import icon11 from '../assets/images/icon11.png'
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
+const drawerWidth = "10%";
 
 
 const NavigationDrawer = () => {
