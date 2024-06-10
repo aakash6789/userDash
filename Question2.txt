@@ -1,0 +1,60 @@
+Logic
+
+So for the logic I have tried to use map and sets . The reason behind using sets, is to find if a trip is valid in O(1) time, thus improving the time complexity. The main reason behind using a map is to create a graph like structure and at same time have access of all connected points of a point. All pickup points and drop points should be a part of the trip. Every item picked up from starting point must end in a drop off point with or without going through warehouse.
+
+
+Assumptions
+-There can be at max one warehouse in a trip.
+-There are no duplicate trips between start point and end point.
+
+Code
+
+type Point = string;
+type Trip = [Point, Point];
+
+function isValidShipment(pickUps: Point[], dropPoints: Point[], trips: Trip[]): boolean {
+    const pickUpSet = new Set(pickUps);
+    const dropPointSet = new Set(dropPoints);
+    const tripMap: Map<Point, Point[]> = new Map();
+
+
+    for (const [start, end] of trips) {
+        if (!tripMap.has(start)) {
+            tripMap.set(start, []);
+        }
+        tripMap.get(start)?.push(end);
+    }
+
+    function isReachable(start: Point, targetSet: Set<Point>, visited: Set<Point> = new Set()): boolean {
+        if (targetSet.has(start)) return true;
+        if (visited.has(start)) return false;
+        visited.add(start);
+        const ends = tripMap.get(start) || [];
+        for (const end of ends) {
+            if (isReachable(end, targetSet, visited)) return true;
+        }
+        return false;
+    }
+
+
+    for (const pickUp of pickUps) {
+        if (!isReachable(pickUp, dropPointSet, new Set())) return false;
+    }
+
+ 
+    const allEnds = new Set(trips.map(([_, end]) => end));
+    for (const [start] of trips) {
+        if (!pickUpSet.has(start) && !allEnds.has(start)) return false;
+    }
+
+    return true;
+}
+
+
+const pickUps = ['A', 'B'];
+const dropPoints = ['C', 'D'];
+const validTrips: Trip[] = [['A', 'W'], ['B', 'W'], ['W', 'C'], ['W', 'D']];
+const invalidTrips: Trip[] = [['A', 'W1'], ['B', 'W2'], ['W3', 'C'], ['W4', 'D']];
+
+isValidShipment(pickUps, dropPoints, validTrips); 
+isValidShipment(pickUps, dropPoints, invalidTrips); 

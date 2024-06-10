@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Circle from './Circle.jsx';
 const CardComponent = ({element,key}) => {
   return (
+   
     <Card className='font-roboto  px-[1%]  w-full'>
         <h1 className='text-left mb-[3%] ml-[4%] mt-4 font-medium'>{element.tittle}</h1>
         <div className='flex w-[60%] mx-auto items-center justify-center'>
@@ -27,6 +28,7 @@ const CardComponent = ({element,key}) => {
         </div>
       
     </Card>
+  
   )
 }
 
