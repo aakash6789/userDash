@@ -45,17 +45,6 @@ const Home = () => {
       </div>
         <h1 className='font-roboto font-style2 mr-auto mt-[5%] '>Quick Actions</h1>
         <div className="flex items-center mt-[2%] justify-between rounded-2xl space-x-0  w-[90%] py-4 px-[3%] bg-white shadow-sm border">
-      {/* {items.map((item, index) => (
-        <div key={index} className='justify-between space-x-0 flex font-roboto font-style2'>
-          <div className="flex flex-col items-center px-4 pt-2 ml-auto">
-           <img src={item.icon} className='w-[25%] block mx-auto '/>
-            <div className="text-sm max-lg:text-[0.6vh] font-medium text-right pl-auto block">{item.text}</div>
-          </div>
-          {( index < items.length - 1) && (
-            <div className="border-l  top-0 right-0 h-12 border-gray-300"></div>
-          )}
-        </div>
-      ))} */}
       {items.map((item, index) => (
   <div key={index} className="flex items-center font-roboto font-style2 space-x-4">
     <div className="flex flex-col items-start px-4 pt-2">
